@@ -11,6 +11,8 @@ exports.sendPushNotification = functions.database
 			const { _data } = after;
 			const { deviceToken } = _data.receiver; // Always send the device token within the data entry.
 			
+			if(!deviceToken) return;
+			
 			const payload = {
 				notification: {
 					title: 'Notification',
@@ -19,11 +21,7 @@ exports.sendPushNotification = functions.database
 				data: context.params // Passing the path params along with the notification to the device. [optional]
 			};
 			
-			if (deviceToken) {
-				const response = await admin.messaging().sendToDevice(deviceToken, payload);
-				console.log('FCM Response:', JSON.stringify(response));
-			}
-			return;
+			return await admin.messaging().sendToDevice(deviceToken, payload);
 		} catch (ex) {
 			return console.error('Error:', ex.toString());
 		}
