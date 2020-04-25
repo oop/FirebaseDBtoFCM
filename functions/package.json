@@ -6,7 +6,7 @@
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy:prod": "firebase use <YOUR_PROJECT_ID_HERE> && firebase deploy --only functions",
+    "deploy": "firebase use <YOUR_PROJECT_ID_HERE> && firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "engines": {
